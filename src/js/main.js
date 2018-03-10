@@ -42,7 +42,9 @@ $(document).ready(function(){
 			zoom: 4,
 			layergroups : [{name: "Base overlays"},{name: "Fisheries maps"}]
 		},
-		ui 	: { time: 'slider'}
+		ui 	: {
+			query: { time: 'slider'}
+		}
 	});
 	app.init();
 });

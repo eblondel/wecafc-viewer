@@ -136,7 +136,7 @@
         <p>The WECAFC-FIRMS data viewer allows exploring fisheries data of the Caribbean region. To start, click on 'Browse' to discover data in the WECAFC-FIRMS data catalogue and select one or more datasets. Then, click on 'Query' to perform a query on the selected dataset and display it on the map.</p>
         <p><em>This work has received funding from the European Union's Horizon 2020 research and innovation programme under the BlueBRIDGE project (Grant agreement No 675680).</em></p>
         <p class="partner-logos">
-            <img src="img/FAO-copaco-1.png" alt="FAO WECAFC" class="partner-logo" style="height: 80px;margin-right: 20px;"/>
+            <img src="img/partners/fao-wecafc.png" alt="FAO WECAFC" class="partner-logo" style="height: 80px;margin-right: 20px;"/>
             <img src="img/partners/bluebridge.png" alt="Bluebridge" class="partner-logo"/>
         </p>
     </div>
@@ -174,16 +174,20 @@
     </div>
     <div id="queryDialog">
         <!-- Select a dataset -->
-        <div class="selector-wrapper">
-            <div id="datasetSelectorWrapper">
-                <select id="datasetSelector" data-placeholder="Select a dataset">
-                    <option></option>
-                </select>
-            </div>
-        </div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="selector-wrapper">
+					<div id="datasetSelectorWrapper">
+						<select id="datasetSelector" data-placeholder="Select a dataset">
+							<option></option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
         
         <!-- Dynamic query UI -->
-        <div>
+        <div id="dsd-ui-wrapper">
           <!-- Search loader -->
           <p id="dsd-loader" class="loader">
             <img alt="loading" src="img/loading.gif" />
