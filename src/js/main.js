@@ -25,6 +25,11 @@ $(document).ready(function(){
 				visible: false, showLegend: true, opacity: 0.9, tiled: true, cql_filter: undefined
 			},
 			{
+				group: 0, id: "wecafc", title: "WECAFC Competence area",
+				wmsUrl: "http://www.fao.org/figis/geoserver/rfb/wms", layer: "rfb:RFB_WECAFC",
+				visible: true, showLegend: true, opacity: 0.9, tiled: true, cql_filter: undefined, style: 'wecafc'
+			},
+			{
 				group: 0, id: "marineareas", title: "Marine areas",
 				wmsUrl: "http://www.fao.org/figis/geoserver/fifao/wms", layer: "fifao:MarineAreas",
 				visible: true, showLegend: true, opacity: 0.9, tiled: true, cql_filter: undefined
