@@ -316,8 +316,8 @@ ol.control.LayerSwitcher.prototype.renderLegendGraphic_ = function(lyr, idx, li)
 			var legend = document.createElement('div');
 			var legendId = lyr.get('title').replace(' ', '-') + '_' + idx + "_legend";
 			legend.id = legendId;
-			legend.style.display = (lyr.getVisible()? "inline" : "none");
-			var img = '<img src="'+imgSrc+'" />';
+			legend.style.display = (lyr.getVisible()? "block" : "none");
+			var img = '<img src="'+imgSrc+'"/>';
 			legend.innerHTML = img;
 			li.appendChild(legend);
 		}

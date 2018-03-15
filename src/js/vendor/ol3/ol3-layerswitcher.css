@@ -69,7 +69,7 @@
 
 .layer-switcher-layer  > label{
 	margin-left:2px;
-    	display: inline;
+    display: inline;
 }
 
 .layer-switcher-layer > div {
@@ -85,5 +85,5 @@
 }
 
 .layer-switcher-layer input {
-    vertical-align: text-bottom;
+    vertical-align: middle;
 }

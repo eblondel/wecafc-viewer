@@ -17,7 +17,17 @@ $(document).ready(function(){
 			{
 				group: 0, id: "eez", title: "EEZ boundaries",
 				wmsUrl: "https://wecafc-firms.d4science.org/geoserver/wecafc/wms", layer: "wecafc:eez_overlap_strict",
-				visible: true, showLegend: false, opacity: 0.6, tiled: true, cql_filter: undefined
+				visible: true, showLegend: true, opacity: 0.6, tiled: true, cql_filter: undefined
+			},
+			{
+				group: 0, id: "fsa2", title: "FAO Subarea 41.1 and breakdown",
+				wmsUrl: "http://www.fao.org/figis/geoserver/area/wms", layer: "area:FAO_AREAS",
+				visible: false, showLegend: true, opacity: 0.9, tiled: true, cql_filter: "F_SUBAREA = '41.1'"
+			},
+			{
+				group: 0, id: "fsa1", title: "FAO Major Area 31 and breakdown* <br><small style='margin-left: 22px'>(*draft stage, not endorsed by CWP)</small>",
+				wmsUrl: "http://www.fao.org/figis/geoserver/fifao/wms", layer: "fifao:FAO_AREAS",
+				visible: false, showLegend: true, opacity: 0.9, tiled: true, cql_filter: "F_AREA = 31"
 			},	
 			{
 				group: 0, id: "wecafc", title: "WECAFC Competence area",
@@ -27,7 +37,7 @@ $(document).ready(function(){
 			{
 				group: 0, id: "marineareas", title: "Marine areas",
 				wmsUrl: "https://wecafc-firms.d4science.org/geoserver/wecafc/wms", layer: "wecafc:MarineAreas",
-				visible: true, showLegend: true, opacity: 0.9, tiled: true, cql_filter: undefined
+				visible: true, showLegend: false, opacity: 0.9, tiled: true, cql_filter: undefined
 			}
 		]
 	},{
