@@ -37,7 +37,7 @@ $(document).ready(function(){
 			{
 				group: 0, id: "marineareas", title: "Marine areas",
 				wmsUrl: "https://wecafc-firms.d4science.org/geoserver/wecafc/wms", layer: "wecafc:MarineAreas",
-				visible: true, showLegend: false, opacity: 0.9, tiled: true, cql_filter: undefined
+				visible: true, showLegend: false, opacity: 0.9, tiled: false, cql_filter: undefined
 			},
 			{
 				group: 2, id: "firms-resources", title: "Marine resources",
