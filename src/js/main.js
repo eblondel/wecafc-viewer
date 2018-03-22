@@ -38,6 +38,17 @@ $(document).ready(function(){
 				group: 0, id: "marineareas", title: "Marine areas",
 				wmsUrl: "https://wecafc-firms.d4science.org/geoserver/wecafc/wms", layer: "wecafc:MarineAreas",
 				visible: true, showLegend: false, opacity: 0.9, tiled: true, cql_filter: undefined
+			},
+			{
+				group: 2, id: "firms-resources", title: "Marine resources",
+				wmsUrl: "http://www.fao.org/figis/geoserver/firms/wms", layer: "firms:resource_all_points",
+				visible: true, showLegend: true, opacity: 0.9, tiled: true, cql_filter: "AGENCY = 'WECAFC'",
+				style: 'point_resource_cluster'
+			},{
+				group: 2, id: "firms-fisheries", title: "Fisheries",
+				wmsUrl: "http://www.fao.org/figis/geoserver/firms/wms", layer: "firms:fishery_all_points",
+				visible: true, showLegend: true, opacity: 0.9, tiled: true, cql_filter: "AGENCY = 'WECAFC'",
+				style: 'point_fishery_cluster'
 			}
 		]
 	},{
@@ -50,7 +61,8 @@ $(document).ready(function(){
 		map : {
 			extent: [-140.37817293406107, -18.569372534752684, -5.378172934061055, 45.94234621524731],
 			zoom: 4,
-			layergroups : [{name: "Base overlays"},{name: "Fisheries maps"}]
+			layergroups : [{name: "Base overlays"},{name: "Fisheries maps"},{name: "FIRMS Inventories"}],
+			mainlayergroup: 1
 		},
 		ui 	: {
 			query: { time: 'slider'}
