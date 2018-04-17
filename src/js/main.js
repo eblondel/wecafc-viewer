@@ -42,12 +42,12 @@ $(document).ready(function(){
 			{
 				group: 2, id: "firms-resources", title: "Marine resources",
 				wmsUrl: "http://www.fao.org/figis/geoserver/firms/wms", layer: "firms:resource_all_points",
-				visible: true, showLegend: true, opacity: 0.9, tiled: true, cql_filter: "AGENCY = 'WECAFC'",
+				visible: true, showLegend: true, opacity: 0.9, tiled: false, cql_filter: "AGENCY = 'WECAFC'",
 				style: 'point_resource_cluster'
 			},{
 				group: 2, id: "firms-fisheries", title: "Fisheries",
 				wmsUrl: "http://www.fao.org/figis/geoserver/firms/wms", layer: "firms:fishery_all_points",
-				visible: true, showLegend: true, opacity: 0.9, tiled: true, cql_filter: "AGENCY = 'WECAFC'",
+				visible: true, showLegend: true, opacity: 0.9, tiled: false, cql_filter: "AGENCY = 'WECAFC'",
 				style: 'point_fishery_cluster'
 			}
 		]
