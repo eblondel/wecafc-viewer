@@ -26,6 +26,11 @@ $(document).ready(function(){
 				visible: false, showLegend: true, opacity: 0.6, tiled: true, cql_filter: undefined
 			},
 			{
+				group: 0, id: "countries", title: "Countries",
+				wmsUrl: "https://wecafc-firms.d4science.org/geoserver/wecafc/wms", layer: "wecafc:countries",
+				visible: true, showLegend: true, opacity: 0.8, tiled: true, cql_filter: "iso_3 IN('ABW','AIA','ATG','BES','BHS','BLM','BLZ','BMU','BRA','BRB','COL','CRI','CUB','CUW','CYM','DMA','DOM','GLP','GRD','GTM','GUF','GUY','HND','HTI','JAM','KNA','LCA','MAF','MEX','MSR','MTQ','NIC','PAN','PRI','SUR','SXM','TCA','TTO','USA','VCT','VEN','VGB','VIR')"
+			},
+			{
 				group: 0, id: "intersect_fsa_eez", title: "FAO Areas* - EEZ Intersects <br><small style='margin-left: 22px'>(*including breakdown in draft stage, not endorsed by CWP)</small>",
 				wmsUrl: "http://www.fao.org/figis/geoserver/fifao/wms", layer: "fifao:FAO_AREAS_x_EEZ_HIGHSEAS",
 				visible: false, showLegend: true, opacity: 0.9, tiled: true, cql_filter: "F_AREA = 31"
