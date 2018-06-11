@@ -1,1 +1,5 @@
 /** WECAFC-FIRMS data viewer CSS stylesheet **/
+
+.topbarContent {top: 60px !important;}
+.disclaimerContent {position: absolute; left: 40px;top: 10px; z-index: 1; font-size: 80%; padding:4px;color:red;background-color:#fff;opacity:0.8;text-align:center;border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px;}
+.disclaimerContent p {margin:0px; font-size:16px;}
