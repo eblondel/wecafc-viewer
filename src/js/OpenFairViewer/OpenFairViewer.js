@@ -1,6 +1,6 @@
 /**
- * openfisviewer - Data query & visualization of geo-referenced data series
- * Copyright (c) 2017 Emmanuel Blondel
+ * OpenFairViewer - a FAIR, ISO and OGC (meta)data compliant GIS data viewer (20181213)
+ * Copyright (c) 2018 Emmanuel Blondel
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
  * and associated documentation files (the "Software"), to deal in the Software without restriction, 
@@ -49,13 +49,13 @@
 	}
 
 	/**
-	 * Function to instantiate an openfis-view
+	 * Function to instantiate an OpenFairViewer
 	 */
-	OpenFisViewer = function(config, opt_options){
+	OpenFairViewer = function(config, opt_options){
 		var this_ = this;
 		
 		//version
-		this.versioning = {VERSION: "1.1.0", DATE: new Date(2018,5,21)}
+		this.versioning = {VERSION: "1.0.0", DATE: new Date(2018,12,13)}
 		
 		if(!config.OGC_CSW_BASEURL){
 			alert("FisViewer instance cannot be instantiated. Missing CSW endpoint")
@@ -179,9 +179,9 @@
 	//Init
 	//==========================================================================================
     /**
-	 * OpenFisViewer.prototype.init
+	 * OpenFairViewer.prototype.init
 	 */
-	OpenFisViewer.prototype.init = function(){
+	OpenFairViewer.prototype.init = function(){
 		var this_ = this;
 		this.selection = new Array();
 		this.initDataCatalogue();
@@ -212,10 +212,10 @@
 	//===========================================================================================
 	
 	/**
-	 * OpenFisViewer.prototype.rewriteURL
+	 * OpenFairViewer.prototype.rewriteURL
 	 * @param
 	 */
-	OpenFisViewer.prototype.rewriteURL = function(url){
+	OpenFairViewer.prototype.rewriteURL = function(url){
 		if(window.location.origin.startsWith("https")){
 			url = url.replace(/^http:\/\//i, 'https://');
 		}
@@ -223,11 +223,11 @@
 	}
         
 	/**
-	 * OpenFisViewer.prototype.ligthenMetadata
+	 * OpenFairViewer.prototype.ligthenMetadata
 	 * Ligthens a metadata parsed with ogc-schemas library
 	 * @param inObj
 	 */
-	OpenFisViewer.prototype.lightenMetadata = function(inObj) {
+	OpenFairViewer.prototype.lightenMetadata = function(inObj) {
 		var obj = inObj;
 		if(obj instanceof Array){
 			var newObj = new Array();
@@ -270,13 +270,13 @@
 	}
 
 	/**
-	 * OpenFisViewer.prototype.getAllUrlParams util function to get URL param valus
+	 * OpenFairViewer.prototype.getAllUrlParams util function to get URL param valus
 	 * Here the primary use is to be able to grab a security token that would be
 	 * passed from within a i-Marine VRE portlet
 	 * @param url
 	 * @returns an object with all parameter values
 	 */
-	OpenFisViewer.prototype.getAllUrlParams = function(url) {
+	OpenFairViewer.prototype.getAllUrlParams = function(url) {
 		var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
 
 		var obj = {};
@@ -314,9 +314,9 @@
 	//==========================================================================================
 		
 	/**
-	 * OpenFisViewer.prototype.initDataCatalogue
+	 * OpenFairViewer.prototype.initDataCatalogue
 	 */
-	OpenFisViewer.prototype.initDataCatalogue = function(){
+	OpenFairViewer.prototype.initDataCatalogue = function(){
 		var cswConfig = [
 			[
 				OWS_1_0_0,
@@ -363,10 +363,10 @@
 	}
         
 	/**
-	 * OpenFisViewer.prototype.createMetadataEntry
+	 * OpenFairViewer.prototype.createMetadataEntry
 	 * @param value
 	 */
-	OpenFisViewer.prototype.createMetadataEntry = function(value){
+	OpenFairViewer.prototype.createMetadataEntry = function(value){
 		var this_ = this;
 		var md_entry = new Object();
 		md_entry.metadata = this_.lightenMetadata(value);
@@ -394,11 +394,11 @@
 	}
 		
 	/**
-	 * OpenFisViewer.prototype.getDatasetsFromCSW
+	 * OpenFairViewer.prototype.getDatasetsFromCSW
 	 * @param maxNb maximum number of records
 	 * @param bbox
 	 */
-	OpenFisViewer.prototype.getDatasetsFromCSW = function(maxNb, bbox){
+	OpenFairViewer.prototype.getDatasetsFromCSW = function(maxNb, bbox){
 		
 		var this_ = this;
 		var deferred = $.Deferred();
@@ -463,10 +463,10 @@
         
         
 	/**
-	 * OpenFisViewer.prototype.displayDatasets
+	 * OpenFairViewer.prototype.displayDatasets
 	 *
 	 */
-	OpenFisViewer.prototype.displayDatasets = function(bbox){
+	OpenFairViewer.prototype.displayDatasets = function(bbox){
 		var this_ = this;
 		$($("#dataset-list").find("section")[0]).empty();
 		$("#dataset-loader").show();
@@ -506,9 +506,9 @@
 	}
 	 
 	/**
-	 * OpenFisViewer.prototype.displayGraphicOverviews
+	 * OpenFairViewer.prototype.displayGraphicOverviews
 	 */
-	OpenFisViewer.prototype.displayGraphicOverviews = function(){
+	OpenFairViewer.prototype.displayGraphicOverviews = function(){
 		var imgs = $("img.graphic_overview");
 		$.each(imgs, function () {
 			var $this = $(this);
@@ -523,21 +523,21 @@
 			im.onerror = function(){
 				var theImage = $this;
 				$this.hide();
-				$this.css("background", "url('js/openfisviewer/img/loading-error.svg')");
+				$this.css("background", "url('js/OpenFairViewer/img/loading-error.svg')");
 				$this.show();
 			}
-			$this.css("background", "url('js/openfisviewer/img/loading.gif')");
+			$this.css("background", "url('js/OpenFairViewer/img/loading.gif')");
 			im.src = $this.data("mainsrc");
 		});
 	}
   
 	/**
-	 * OpenFisViewer.prototype.displayDatasetInfo
+	 * OpenFairViewer.prototype.displayDatasetInfo
 	 * Display the metadata associated to a dataset
 	 * @param elm
 	 *
 	 **/
-	OpenFisViewer.prototype.displayDatasetInfo = function(elm){  
+	OpenFairViewer.prototype.displayDatasetInfo = function(elm){  
 		var pid = elm.getAttribute('data-pid');
 		console.log("Select dataset with pid = " + pid);
 		var dataset = this.datasets.filter(function(data){if(data.pid == pid){return data}})[0];
@@ -545,12 +545,12 @@
 	}
 	  
 	/**
-	 * OpenFisViewer.prototype.selectDataset
+	 * OpenFairViewer.prototype.selectDataset
 	 * Selects a dataset
 	 * @param elm
 	 *
 	 **/
-	OpenFisViewer.prototype.selectDataset = function(elm){
+	OpenFairViewer.prototype.selectDataset = function(elm){
 		var pid = elm.getAttribute('data-pid');
 		console.log("Select dataset with pid = " + pid);
 		var out =false;
@@ -565,11 +565,11 @@
 	}
          
 	/**
-	 * OpenFisViewer.prototype.unselectDataset
+	 * OpenFairViewer.prototype.unselectDataset
 	 * Unselects a dataset
 	 * @param elm
 	**/
-	OpenFisViewer.prototype.unselectDataset = function(elm){
+	OpenFairViewer.prototype.unselectDataset = function(elm){
 		var pid = elm.getAttribute('data-pid');
 		console.log("Unselect dataset with pid = " + pid);
 		var out = false;
@@ -595,11 +595,11 @@
 	}
 	
 	/**
-	 * OpenFisViewer.prototype.actionDataset
+	 * OpenFairViewer.prototype.actionDataset
 	 * Action on a dataset
 	 * @param elm
 	**/
-	OpenFisViewer.prototype.actionDataset = function(elm){
+	OpenFairViewer.prototype.actionDataset = function(elm){
 		var glyphicon = $($(elm).find("span")[0]).prop("class");
 		if(glyphicon == "glyphicon glyphicon-plus"){
 			this.selectDataset(elm);
@@ -609,10 +609,10 @@
 	}
          
 	/**
-	 * OpenFisViewer.prototype.updateSelection
+	 * OpenFairViewer.prototype.updateSelection
 	 * Actions performed when updating the dataset selection
 	 */
-	OpenFisViewer.prototype.updateSelection = function(){
+	OpenFairViewer.prototype.updateSelection = function(){
 		var this_ = this;
 		
 		//update Data list UI
@@ -658,9 +658,9 @@
 	}
          
 	/**
-	 * OpenFisViewer.prototype.updateDatasetSelector
+	 * OpenFairViewer.prototype.updateDatasetSelector
 	 */
-	OpenFisViewer.prototype.updateDatasetSelector = function(init){
+	OpenFairViewer.prototype.updateDatasetSelector = function(init){
 		var this_ = this;
 		var formatDatasetSelection = function(dataset) {
 		  if (!dataset.id) { return dataset.text; }
@@ -700,11 +700,11 @@
 	}
 	
 	/**
-	 * OpenFisViewer.prototype.getCSWRecord
+	 * OpenFairViewer.prototype.getCSWRecord
 	 * @param pid
 	 * @returns a promise
 	 */
-	OpenFisViewer.prototype.getCSWRecord = function(pid){
+	OpenFairViewer.prototype.getCSWRecord = function(pid){
 		console.log("Fetching metadata record from CSW for pid = '"+pid+"'");
 		var this_ = this;
 		var deferred = $.Deferred();
@@ -721,11 +721,11 @@
 	}	 
          
 	/**
-	 * OpenFisViewer.prototype.parseDSD
+	 * OpenFairViewer.prototype.parseDSD
 	 * @param response
 	 * @returns a DSD json object
 	 */
-	OpenFisViewer.prototype.parseDSD = function(response){
+	OpenFairViewer.prototype.parseDSD = function(response){
 
 		//artisanal parsing of feature catalog XML
 		//TODO keep investigating ogc-schemas extension for gfc.xsd with jsonix!!!!
@@ -772,10 +772,10 @@
 	}
 	
 	/**
-	 * OpenFisViewer.prototype.getDSD
+	 * OpenFairViewer.prototype.getDSD
 	 * @param pid
 	 */
-	OpenFisViewer.prototype.getDSD = function(pid){
+	OpenFairViewer.prototype.getDSD = function(pid){
 
 	    var deferred = $.Deferred();	
           
@@ -840,7 +840,7 @@
 							  if (!item.id) { return item.text; }
 							  if(["flag", "flagstate", "country"].indexOf(item.codelist.toLowerCase()) > -1){
 								  var $item = $(
-									'<img src="js/openfisviewer/img/flags/' + item.id.toLowerCase() + '.gif" class="img-flag" />' +
+									'<img src="js/OpenFairViewer/img/flags/' + item.id.toLowerCase() + '.gif" class="img-flag" />' +
 									'<span class="dsd-ui-item-label" >' + item.text + ' <span class="dsd-ui-item-code">['+item.id+']</span>' + '</span>'
 								  );
 							  }else{
@@ -951,7 +951,7 @@
 						$("#dsd-ui-col-2").append('</p></div>');
 					}
 				}else{
-					alert("openfisviewer doesn't support yet data services with a single time parameter")
+					alert("OpenFairViewer doesn't support yet data services with a single time parameter")
 				}
 				
 				//3. Other time dimensions
@@ -1139,9 +1139,9 @@
 	}
 	
 	/**
-	 * OpenFisViewer.prototype.getViewParams
+	 * OpenFairViewer.prototype.getViewParams
 	 */
-	 OpenFisViewer.prototype.getViewParams = function(){
+	 OpenFairViewer.prototype.getViewParams = function(){
 		var this_ = this;
 		var data_query = "";
 		
@@ -1186,12 +1186,12 @@
 	//===========================================================================================
 		
 	/**
-	 * OpenFisViewer.prototype.initMap Inits the map
+	 * OpenFairViewer.prototype.initMap Inits the map
 	 * @param id
 	 * @param main
 	 * @param extent
 	 */
-	OpenFisViewer.prototype.initMap = function(id, main, extent){
+	OpenFairViewer.prototype.initMap = function(id, main, extent){
         
 		var map;
 		var this_ = this;
@@ -1339,7 +1339,7 @@
 	}
         
     /**
-	 * OpenFisViewer.prototype.addLayer Adds layer
+	 * OpenFairViewer.prototype.addLayer Adds layer
 	 * @param mainOverlayGroup
 	 * @param id
 	 * @param title
@@ -1352,7 +1352,7 @@
 	 * @param envparams
 	 * @param count
 	 */
-	OpenFisViewer.prototype.addLayer = function(mainOverlayGroup, id, title, wmsUrl, layer, visible, showLegend, opacity, tiled,
+	OpenFairViewer.prototype.addLayer = function(mainOverlayGroup, id, title, wmsUrl, layer, visible, showLegend, opacity, tiled,
 											cql_filter, style, viewparams, envfun, envparams, count){
 		var this_ = this;
 		var layerParams = {
@@ -1403,10 +1403,10 @@
 	}
         
     /**
-	 * OpenFisViewer.prototype.addLayerTooltip
+	 * OpenFairViewer.prototype.addLayerTooltip
 	 * @param layer
 	 */
-    OpenFisViewer.prototype.addLayerTooltip = function(layer){
+    OpenFairViewer.prototype.addLayerTooltip = function(layer){
 		var this_ = this;
 		//configure popup
 		var popup = new ol.Overlay.Popup({id: layer.id});
@@ -1437,11 +1437,11 @@
 
 	
     /**
-	 * OpenFisViewer.prototype.removeLayerByProperty Util method to remove a layer by property
+	 * OpenFairViewer.prototype.removeLayerByProperty Util method to remove a layer by property
 	 * @param layerProperty the property value
 	 * @param by the property 
 	 */
-    OpenFisViewer.prototype.removeLayerByProperty = function(layerProperty, by){
+    OpenFairViewer.prototype.removeLayerByProperty = function(layerProperty, by){
 		console.log("Remove layer dataset with property "+by+" = " + layerProperty);
 		var removed = false;
 		if(!by) byTitle = false;
@@ -1464,12 +1464,12 @@
 	}
         
 	/**
-	 * OpenFisViewer.prototype.getDatasetMaxValue
-	 * @deprecated OpenFisViewer.getDatasetValues is used
+	 * OpenFairViewer.prototype.getDatasetMaxValue
+	 * @deprecated OpenFairViewer.getDatasetValues is used
 	 * @param viewparams
 	 * @returns a JQuery promise
 	 */
-	OpenFisViewer.prototype.getDatasetMaxValue = function(viewparams){
+	OpenFairViewer.prototype.getDatasetMaxValue = function(viewparams){
 	    var maxValueRequest = this.getDatasetWFSLink(true, viewparams, "GML2") + "&sortBy=value+D&maxFeatures=1";
 	    var deferred = $.Deferred();
 	    $.ajax({
@@ -1491,11 +1491,11 @@
 	}
 
 	/**
-	 * OpenFisViewer.prototype.getDatasetFeatures
+	 * OpenFairViewer.prototype.getDatasetFeatures
 	 * @param viewparams
 	 * @returns a Jquery promise
 	 */
-	OpenFisViewer.prototype.getDatasetFeatures = function(viewparams){
+	OpenFairViewer.prototype.getDatasetFeatures = function(viewparams){
 	    var wfsRequest = this.getDatasetWFSLink(true, viewparams, "json") + "&propertyName=value";
 	    var deferred = $.Deferred();
 	    $.ajax({
@@ -1516,11 +1516,11 @@
 	}
 	
 	/**
-	 * OpenFisViewer.prototype.getDatasetValues
+	 * OpenFairViewer.prototype.getDatasetValues
 	 * @param an array of features
 	 * @returns a array of values
 	 */
-	OpenFisViewer.prototype.getDatasetValues = function(features){
+	OpenFairViewer.prototype.getDatasetValues = function(features){
 		var values = new Array();
 		if(features.length > 0){
 			values = features.map(function(f){return f.properties.value});
@@ -1529,13 +1529,13 @@
 	}
 
 	/**
-     * OpenFisViewer.prototype.calculateBreaks
+     * OpenFairViewer.prototype.calculateBreaks
 	 * @param values an array of numeric values
 	 * @param classType the type of classification to apply
 	 * @param classNb the number N of class breaks
 	 * @returns an array of N+1 class breaks
      */
-	OpenFisViewer.prototype.calculateBreaks = function(values, classType, classNb){
+	OpenFairViewer.prototype.calculateBreaks = function(values, classType, classNb){
 	    var breaks =  new Array();
 	    switch(classType){
 		//CKmeans
@@ -1566,9 +1566,9 @@
 	}
 
 	/**
-	 * OpenFisViewer.prototype.buildEnvParams
+	 * OpenFairViewer.prototype.buildEnvParams
 	 */
-	OpenFisViewer.prototype.buildEnvParams = function(breaks){
+	OpenFairViewer.prototype.buildEnvParams = function(breaks){
 	    var envparams = "";
 	    for(var i=1;i<=breaks.length;i++){
 		envparams += "v"+ i +":"+ breaks[i-1] + ";";
@@ -1577,11 +1577,11 @@
 	}
 
 	/**
-	 * OpenFisViewer.prototype.getDatasetViewTitle
+	 * OpenFairViewer.prototype.getDatasetViewTitle
 	 * @param baseTitle
 	 * @param viewparams
 	 */
-	OpenFisViewer.prototype.getDatasetViewTitle = function(baseTitle, viewparams){
+	OpenFairViewer.prototype.getDatasetViewTitle = function(baseTitle, viewparams){
 		var layerTitle = baseTitle;
 		layerTitle += '<br>';
 	    	layerTitle += '<p style="font-weight:normal !important;font-size:90%;margin-left:20px;overflow-wrap:break-word;"><b>View parameters:</b> ' 
@@ -1590,9 +1590,9 @@
 	}
 
 	/**
-	 * OpenFisViewer.prototype.mapDataset
+	 * OpenFairViewer.prototype.mapDataset
 	 */
-	OpenFisViewer.prototype.mapDataset = function(){
+	OpenFairViewer.prototype.mapDataset = function(){
 		var this_ = this;
 
 		$("#datasetMapper").prop('disabled', true);
@@ -1728,13 +1728,13 @@
 	}
 
 	/**
-	 * OpenFisViewer.prototype.getDatasetWFSLink
+	 * OpenFairViewer.prototype.getDatasetWFSLink
 	 * @param aggregated true if aggregated, false otherwise
 	 * @param viewparams query viewparams
    	 * @param format optional format to be specified, by default it will provide a CSV
 	 * @return the WFS layer URL
 	 */
-	OpenFisViewer.prototype.getDatasetWFSLink = function(aggregated, viewparams, format){
+	OpenFairViewer.prototype.getDatasetWFSLink = function(aggregated, viewparams, format){
 		var layerName = this.selected_dsd.pid;
 		if(aggregated) layerName += "_aggregated";
 		var layerUrl = this.selected_dsd.dataset.metadata.distributionInfo.mdDistribution.transferOptions[0].mdDigitalTransferOptions.onLine.filter(
@@ -1756,7 +1756,7 @@
 		 * @param objArray
 		 * @returns a string representive the CSV
 		 */
-		OpenFisViewer.prototype.json2csv = function(objArray) {
+		OpenFairViewer.prototype.json2csv = function(objArray) {
 			var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
 			var str = '';
 			var line = '';
@@ -1789,7 +1789,7 @@
 		 * @param fileName
 		 * @param mimeType
 		 */
-		OpenFisViewer.prototype.downloadCSV = function(content, fileName, mimeType) {
+		OpenFairViewer.prototype.downloadCSV = function(content, fileName, mimeType) {
 			if(!mimeType) mimeType <- 'text/csv;charset=utf-8;';
   			var a = document.createElement('a');
   			mimeType = mimeType || 'application/octet-stream';
@@ -1813,19 +1813,19 @@
 	
 	
 	/**
-	 * OpenFisViewer.prototype.getateTimeString
+	 * OpenFairViewer.prototype.getateTimeString
 	 * @param date
 	 */
-	OpenFisViewer.prototype.getDateTimeString = function(date){
+	OpenFairViewer.prototype.getDateTimeString = function(date){
 		var str = date.toISOString();
 		return (str.split("T")[0] + "" + str.split("T")[1].split(".")[0]).replace(/-/g,"").replace(/:/g,"");
 	}
 	
 	/**
-	 * OpenFisViewer.prototype.downloadDatasetCSV
+	 * OpenFairViewer.prototype.downloadDatasetCSV
 	 * @param aggregated true if aggregated, false otherwise
 	 */
-	OpenFisViewer.prototype.downloadDatasetCSV = function(aggregated){
+	OpenFairViewer.prototype.downloadDatasetCSV = function(aggregated){
 		var this_ = this;
 		var layerUrl = this.getDatasetWFSLink(aggregated, this.getViewParams(), 'json');
 		$.getJSON(layerUrl, function(response){
@@ -1850,10 +1850,10 @@
 	}
 	
 	/**
-	 * OpenFisViewer.prototype.downloadMapPNG
+	 * OpenFairViewer.prototype.downloadMapPNG
 	 *
 	 */
-	OpenFisViewer.prototype.downloadMapPNG = function(){
+	OpenFairViewer.prototype.downloadMapPNG = function(){
 		var this_ = this;
 		this.map.once('postcompose', function(event) {
 			var canvas = event.context.canvas;
@@ -1870,11 +1870,11 @@
 	}
 	 
 	/**
-	 * OpenFisViewer.prototype.setLegendGraphic Set legend graphic
+	 * OpenFairViewer.prototype.setLegendGraphic Set legend graphic
 	 * @param a ol.layer.Layer object
 	 * @param breaks an array of break values
 	 */	 
-	OpenFisViewer.prototype.setLegendGraphic = function(lyr, breaks) {
+	OpenFairViewer.prototype.setLegendGraphic = function(lyr, breaks) {
 		var this_ = this;
 		var source = lyr.getSource();
 		if( source instanceof ol.source.TileWMS | source instanceof ol.source.ImageWMS ){
@@ -1936,11 +1936,11 @@
        
     
 	/**
-	 * OpenFisViewer.prototype.getLayerByProperty Util method to get layer by property
+	 * OpenFairViewer.prototype.getLayerByProperty Util method to get layer by property
 	 * @param layerProperty the property value
 	 * @param by the property 
 	 */
-	OpenFisViewer.prototype.getLayerByProperty = function(layerProperty, by){
+	OpenFairViewer.prototype.getLayerByProperty = function(layerProperty, by){
 		if(!by) byTitle = false;
 		var target = undefined;
 		for(var i=0;i<this.map.getLayerGroup().getLayersArray().length;i++){
@@ -1955,9 +1955,9 @@
 	}
        
 	/**
-	 * OpenFisViewer.prototype.initDataViewer
+	 * OpenFairViewer.prototype.initDataViewer
 	 */
-	OpenFisViewer.prototype.initDataViewer = function(){
+	OpenFairViewer.prototype.initDataViewer = function(){
 		var this_ = this;
 		this_.map = this_.initMap('map', true, false);
 		$($("li[data-where='#pageMap']")).on("click", function(e){
@@ -1977,9 +1977,9 @@
 	}
 
 	/**
-	 * OpenFisViewer.prototype.setEmbedLink
+	 * OpenFairViewer.prototype.setEmbedLink
 	 */
-	OpenFisViewer.prototype.setEmbedLink = function(){
+	OpenFairViewer.prototype.setEmbedLink = function(){
 		if ( ! ( document.getElementById ) ) return void(0);
 		var url = location.href.replace(/#.*$/,'').replace(/\?.*$/,'');
 		
@@ -2010,7 +2010,7 @@
 		url += "&center=" + this.map.getView().getCenter().join(',');
 		url += "&zoom=" + this.map.getView().getZoom();
 		
-		document.getElementById('openfisviewer-link').value = url;
+		document.getElementById('OpenFairViewer-link').value = url;
 	}
         
 	//===========================================================================================
@@ -2018,10 +2018,10 @@
 	//===========================================================================================
 
 	/**
-	 * OpenFisViewer.prototype.resolveDatasetForQuery
+	 * OpenFairViewer.prototype.resolveDatasetForQuery
 	 * @param datasetDef
 	 */
-	OpenFisViewer.prototype.resolveDatasetForQuery = function(datasetDef){
+	OpenFairViewer.prototype.resolveDatasetForQuery = function(datasetDef){
 		var this_ = this;
 		console.log("Fetching query interface for pid = '"+datasetDef.pid+"'");
 		this_.openQueryDialog();
@@ -2067,10 +2067,10 @@
 	}
 
 	/**
-	 * OpenFisViewer.prototype.resolveDatasetForMap
+	 * OpenFairViewer.prototype.resolveDatasetForMap
 	 * @param datasetDef
 	 */
-	OpenFisViewer.prototype.resolveDatasetForMap = function(datasetDef){
+	OpenFairViewer.prototype.resolveDatasetForMap = function(datasetDef){
 		console.log("Resolving map for pid = '"+datasetDef.pid+"'");
 		var this_ = this;
 		var layerName = datasetDef.pid + "_aggregated";
@@ -2083,10 +2083,10 @@
 	}
 
 	/**
-	 * OpenFisViewer.prototype.resolveViewer
+	 * OpenFairViewer.prototype.resolveViewer
 	 * Resolves the map viewer from URL parameters
 	 */
-	OpenFisViewer.prototype.resolveViewer = function(){
+	OpenFairViewer.prototype.resolveViewer = function(){
 		var this_ = this;
 		
 		//url params
@@ -2169,9 +2169,9 @@
 	//===========================================================================================
     
 	/**
-     * OpenFisViewer.prototype.initDialog Init dialog
+     * OpenFairViewer.prototype.initDialog Init dialog
 	 */
-	OpenFisViewer.prototype.initDialog = function(id, title, classes, position, liIdx, iconName, onopen, onclose){
+	OpenFairViewer.prototype.initDialog = function(id, title, classes, position, liIdx, iconName, onopen, onclose){
 		var this_ = this;
 		if(!classes){
 			classes  = {
@@ -2212,82 +2212,82 @@
     }
    
 	/**
-	 * OpenFisViewer.prototype.openDialog Open dialog
+	 * OpenFairViewer.prototype.openDialog Open dialog
 	 */
-	OpenFisViewer.prototype.openDialog = function(id){
+	OpenFairViewer.prototype.openDialog = function(id){
 		if(!$("#" + id).dialog("isOpen")){
 			$("#" + id).dialog("open");
 		}
 	}
    
 	/**
-	 * OpenFisViewer.prototype.closeDialog Close dialog
+	 * OpenFairViewer.prototype.closeDialog Close dialog
 	 */
-	OpenFisViewer.prototype.closeDialog = function(id){
+	OpenFairViewer.prototype.closeDialog = function(id){
 		if($("#" + id).dialog("isOpen")){
 			$("#" + id).dialog("close");
 		}
 	}
 	
     /**
-     * OpenFisViewer.prototype.openAboutDialog Open 'About' dialog
+     * OpenFairViewer.prototype.openAboutDialog Open 'About' dialog
      */
-	OpenFisViewer.prototype.openAboutDialog = function(){
+	OpenFairViewer.prototype.openAboutDialog = function(){
 		this.closeDataDialog();
 		this.closeQueryDialog();
 		this.openDialog("aboutDialog");
 	}
 	
 	/**
-	 * OpenFisViewer.prototype.closeAboutDialog Close 'About' dialog
+	 * OpenFairViewer.prototype.closeAboutDialog Close 'About' dialog
 	 */
-	OpenFisViewer.prototype.closeAboutDialog = function(){
+	OpenFairViewer.prototype.closeAboutDialog = function(){
 		this.closeDialog("aboutDialog");
 	}
    
     /**
-	 * OpenFisViewer.prototype.openDataDialog Open 'Data' dialog
+	 * OpenFairViewer.prototype.openDataDialog Open 'Data' dialog
 	 */
-	OpenFisViewer.prototype.openDataDialog = function(){
+	OpenFairViewer.prototype.openDataDialog = function(){
 		this.closeAboutDialog();
 		this.closeQueryDialog();
 		this.openDialog("dataDialog");
 	}
    
     /**
-	* OpenFisViewer.prototype.closeDataDialog Close 'Data' dialog
+	* OpenFairViewer.prototype.closeDataDialog Close 'Data' dialog
 	*/
-	OpenFisViewer.prototype.closeDataDialog = function(){
+	OpenFairViewer.prototype.closeDataDialog = function(){
 		this.closeDialog("dataDialog");
 	}
 	
 	/**
-	* OpenFisViewer.prototype.openQueryDialog Open 'Query' dialog
+	* OpenFairViewer.prototype.openQueryDialog Open 'Query' dialog
 	*/
-	OpenFisViewer.prototype.openQueryDialog = function(){
+	OpenFairViewer.prototype.openQueryDialog = function(){
 		this.closeAboutDialog();
 		this.closeDataDialog();
 		this.openDialog("queryDialog");
 	}
    
    /**
-	* OpenFisViewer.prototype.closeQueryDialog Close 'Query' dialog
+	* OpenFairViewer.prototype.closeQueryDialog Close 'Query' dialog
 	*/
-	OpenFisViewer.prototype.closeQueryDialog = function(){
+	OpenFairViewer.prototype.closeQueryDialog = function(){
 		this.closeDialog("queryDialog");
 	}
 	
 	/**
-	* OpenFisViewer.prototype.openInfoDialog Open 'Info' dialog
+	* OpenFairViewer.prototype.openInfoDialog Open 'Info' dialog
 	*/
-	OpenFisViewer.prototype.openInfoDialog = function(){
+	OpenFairViewer.prototype.openInfoDialog = function(){
 		this.openDialog("infoDialog");
 	}
    
    /**
-	* OpenFisViewer.prototype.closeInfoDialog Close 'Info' dialog
+	* OpenFairViewer.prototype.closeInfoDialog Close 'Info' dialog
 	*/
-	OpenFisViewer.prototype.closeInfoDialog = function(){
+	OpenFairViewer.prototype.closeInfoDialog = function(){
 		this.closeDialog("infoDialog");
 	}
 

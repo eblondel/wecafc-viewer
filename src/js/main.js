@@ -1,7 +1,6 @@
 /**
  * WECAFC Fisheries data viewer 
- * Application development funded by BlueBridge EC project
- * 
+ *
  * @author Emmanuel Blondel GIS & Marine web-information systems Expert
  *		   Contact: https://eblondel.github.io / emmanuel.blondel1@gmail.com 
  */
@@ -10,7 +9,7 @@ var app = app || {};
 var app = "1.0-beta"
  
 $(document).ready(function(){
-	app = new OpenFisViewer({
+	app = new OpenFairViewer({
 		OGC_CSW_BASEURL: "https://wecafc-firms.d4science.org/geonetwork/srv/eng/csw",
 		OGC_CSW_SCHEMA : "http://www.isotc211.org/2005/gmd",
 		OGC_WMS_LAYERS : [
