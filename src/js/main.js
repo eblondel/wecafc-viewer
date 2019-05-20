@@ -18,19 +18,23 @@ $(document).ready(function(){
 				wmsUrl: "http://www.fao.org/figis/geoserver/wms", layer: "fifao:SHELF_ERASE",
 				visible: true, showLegend: true, opacity: 0.8, tiled: true, cql_filter: undefined
 			},
-
 			{
 				group: 0, id: "eez", title: "EEZ boundaries",
 				wmsUrl: "https://wecafc-firms.d4science.org/geoserver/wecafc/wms", layer: "wecafc:eez_overlap_strict",
 				visible: false, showLegend: true, opacity: 0.6, tiled: true, cql_filter: undefined
 			},
 			{
-				group: 0, id: "countries", title: "Countries",
-				wmsUrl: "https://wecafc-firms.d4science.org/geoserver/wecafc/wms", layer: "wecafc:countries",
-				visible: true, showLegend: true, opacity: 0.8, tiled: true, cql_filter: "iso_3 IN('ABW','AIA','ATG','BES','BHS','BLM','BLZ','BMU','BRA','BRB','COL','CRI','CUB','CUW','CYM','DMA','DOM','GLP','GRD','GTM','GUF','GUY','HND','HTI','JAM','KNA','LCA','MAF','MEX','MSR','MTQ','NIC','PAN','PRI','SUR','SXM','TCA','TTO','USA','VCT','VEN','VGB','VIR')"
+				group: 0, id: "200nm", title: "200 nautical miles arcs",
+				wmsUrl: "http://www.fao.org/figis/geoserver/fifao/wms", layer: "fifao:limit_200nm",
+				visible: true, showLegend: true, opacity: 0.6, tiled: true, cql_filter: undefined
 			},
 			{
-				group: 0, id: "intersect_fsa_eez", title: "FAO Areas* - EEZ Intersects <br><small style='margin-left: 22px'>(*including breakdown in draft stage, not endorsed by CWP)</small>",
+				group: 0, id: "countries", title: "Countries",
+				wmsUrl: "http://www.fao.org/figis/geoserver/wms", layer: "UN_intbnd_layergroup",
+				visible: true, showLegend: true, opacity: 0.8, tiled: true, cql_filter: "ISO3_CNT1 IN('ABW','AIA','ATG','BES','BHS','BLM','BLZ','BMU','BRA','BRB','COL','CRI','CUB','CUW','CYM','DMA','DOM','GLP','GRD','GTM','GUF','GUY','HND','HTI','JAM','KNA','LCA','MAF','MEX','MSR','MTQ','NIC','PAN','PRI','SUR','SXM','TCA','TTO','USA','VCT','VEN','VGB','VIR') OR ISO3_CNT2 IN('ABW','AIA','ATG','BES','BHS','BLM','BLZ','BMU','BRA','BRB','COL','CRI','CUB','CUW','CYM','DMA','DOM','GLP','GRD','GTM','GUF','GUY','HND','HTI','JAM','KNA','LCA','MAF','MEX','MSR','MTQ','NIC','PAN','PRI','SUR','SXM','TCA','TTO','USA','VCT','VEN','VGB','VIR')"
+			},
+			{
+				group: 0, id: "intersect_fsa_eez", title: "FAO Areas* - EEZ Intersects <br><small style='margin-left: 22px;display:table;'>(*including breakdown in draft stage, not endorsed by CWP)</small>",
 				wmsUrl: "http://www.fao.org/figis/geoserver/fifao/wms", layer: "fifao:FAO_AREAS_x_EEZ_HIGHSEAS",
 				visible: false, showLegend: true, opacity: 0.9, tiled: true, cql_filter: "F_AREA = 31"
 			},
@@ -40,13 +44,13 @@ $(document).ready(function(){
 				visible: false, showLegend: true, opacity: 0.9, tiled: true, cql_filter: "F_SUBAREA = '41.1'"
 			},
 			{
-				group: 0, id: "fsa_31_division", title: "FAO Major Area 31 - Divisions* <br><small style='margin-left: 22px'>(*draft stage, not endorsed by CWP)</small>",
+				group: 0, id: "fsa_31_division", title: "FAO Major Area 31 - Divisions* <br><small style='margin-left: 22px;display:table;'>(*draft stage, not endorsed by CWP)</small>",
 				wmsUrl: "http://www.fao.org/figis/geoserver/fifao/wms", layer: "fifao:FAO_AREAS",
 				visible: false, showLegend: true, opacity: 0.9, tiled: true, cql_filter: "F_AREA = 31 AND F_LEVEL = 'DIVISION'",
 				style: 'all_fao_areas_orange'
 			},
 			{
-				group: 0, id: "fsa_31_subarea", title: "FAO Major Area 31 - Subareas* <br><small style='margin-left: 22px'>(*draft stage, not endorsed by CWP)</small>",
+				group: 0, id: "fsa_31_subarea", title: "FAO Major Area 31 - Subareas* <br><small style='margin-left: 22px;display:table;'>(*draft stage, not endorsed by CWP)</small>",
 				wmsUrl: "http://www.fao.org/figis/geoserver/fifao/wms", layer: "fifao:FAO_AREAS",
 				visible: false, showLegend: true, opacity: 0.9, tiled: true, cql_filter: "F_AREA = 31 AND F_LEVEL = 'SUBAREA'",
 				style: 'all_fao_areas_blue'
@@ -65,8 +69,8 @@ $(document).ready(function(){
 				group: 0, id: "marineareas", title: "Marine areas",
 				wmsUrl: "https://wecafc-firms.d4science.org/geoserver/wecafc/wms", layer: "wecafc:MarineAreas",
 				visible: true, showLegend: false, opacity: 0.9, tiled: false, cql_filter: undefined
-			},
-			{
+			}
+			/*,{
 				group: 2, id: "firms-resources", title: "Marine resources",
 				wmsUrl: "http://www.fao.org/figis/geoserver/firms/wms", layer: "firms:resource_all_points",
 				visible: true, showLegend: true, opacity: 0.9, tiled: false, cql_filter: "AGENCY = 'WECAFC'",
@@ -76,6 +80,14 @@ $(document).ready(function(){
 				wmsUrl: "http://www.fao.org/figis/geoserver/firms/wms", layer: "firms:fishery_all_points",
 				visible: true, showLegend: true, opacity: 0.9, tiled: false, cql_filter: "AGENCY = 'WECAFC'",
 				style: 'point_fishery_cluster'
+			}*/
+		],
+		OGC_WFS_LAYERS : [
+			{
+				group: 2, id: "firms-resources", title: "Marine resources",
+				wfsUrl: "http://www.fao.org/figis/geoserver/firms/wfs", layer: "firms: resource_all_points",
+				visible: true, cql_filter: "AGENCY = 'WECAFC'"
+
 			}
 		]
 	},{
